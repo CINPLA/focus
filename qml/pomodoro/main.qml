@@ -95,16 +95,31 @@ Rectangle {
     Text {
         id: timerText
         color: "white"
-        anchors.centerIn: parent
-        font.pixelSize: parent.height * 0.4
+        anchors {
+            top: headerText.bottom
+            bottom: footerText.top
+            left: parent.left
+            right: parent.right
+            margins: parent.width * 0.05
+        }
+        font.pixelSize: height
+        horizontalAlignment: Text.AlignHCenter
+        scale: paintedWidth > width ? (width / paintedWidth) : 1
         text: Math.floor(timeLeft / 60) + ":" + pad(Math.floor(timeLeft % 60), 2)
     }
     Text {
         id: footerText
         color: "white"
-        anchors.bottom: parent.bottom
-        anchors.horizontalCenter: parent.horizontalCenter
-        font.pixelSize: parent.height * 0.2
+        anchors {
+            bottom: parent.bottom
+            left: parent.left
+            right: parent.right
+            margins: parent.width * 0.05
+        }
+        height: parent.height / 5
+        font.pixelSize: height
+        horizontalAlignment: Text.AlignHCenter
+        scale: paintedWidth > width ? (width / paintedWidth) : 1
         text: "more minutes"
     }
 
