@@ -130,7 +130,7 @@ Rectangle {
         onTriggered: {
             if(pomodoroRoot.state === "pomodoro") {
                 timeLeft -= interval / 1000
-                if(timeLeft === 0) {
+                if(timeLeft < 0) {
                     pomodoroRoot.state = "break"
                 }
             } else if(pomodoroRoot.state === "break"){
