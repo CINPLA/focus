@@ -3,7 +3,7 @@ import QtQuick 2.0
 Rectangle {
     id: pomodoroRoot
 
-    property real timeLeft: 0 * 60
+    property real timeLeft: 0
 
     width: 1280
     height: 720
@@ -59,11 +59,20 @@ Rectangle {
             }
             PropertyChanges {
                 target: headerText
-                text: "We've been on a break for"
+                text: "Been chilling for"
             }
             PropertyChanges {
                 target: footerText
                 text: "minutes"
+            }
+        }
+    ]
+
+    transitions: [
+        Transition {
+            ColorAnimation {
+                target: pomodoroRoot
+                duration: 200
             }
         }
     ]
@@ -88,7 +97,7 @@ Rectangle {
         color: "white"
         anchors.centerIn: parent
         font.pixelSize: parent.height * 0.4
-        text: Math.floor(timeLeft / 60) + ":" + pad(Math.round(timeLeft % 60), 2)
+        text: Math.floor(timeLeft / 60) + ":" + pad(Math.floor(timeLeft % 60), 2)
     }
     Text {
         id: footerText
