@@ -100,7 +100,6 @@ Rectangle {
             bottom: footerText.top
             left: parent.left
             right: parent.right
-            margins: parent.width * 0.05
         }
         font.pixelSize: height
         horizontalAlignment: Text.AlignHCenter
