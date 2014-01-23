@@ -40,11 +40,11 @@ Rectangle {
             }
             PropertyChanges {
                 target: headerText
-                text: "Paused pomodoro at"
+                text: "Currently disturbed with"
             }
             PropertyChanges {
                 target: footerText
-                text: ""
+                text: "minutes left"
             }
             PropertyChanges {
                 target: timer
@@ -129,7 +129,6 @@ Rectangle {
         anchors.fill: parent
         acceptedButtons: Qt.LeftButton | Qt.RightButton
         onClicked: {
-            console.log(pomodoroRoot.state)
             if(mouse.button === Qt.RightButton) {
                 if(pomodoroRoot.state === "break") {
                     pomodoroRoot.state = "pomodoro"
