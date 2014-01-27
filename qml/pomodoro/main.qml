@@ -1,4 +1,5 @@
 import QtQuick 2.0
+import QtMultimedia 5.0
 
 Rectangle {
     id: pomodoroRoot
@@ -132,6 +133,19 @@ Rectangle {
                 timeLeft -= interval / 1000
                 if(timeLeft < 0) {
                     pomodoroRoot.state = "break"
+                    var soundNumber = Math.floor((Math.random()*3))
+                    console.log(soundNumber)
+                    switch(soundNumber) {
+                    case 0:
+                        dontWorrySound.play()
+                        break
+                    case 1:
+                        allYouGotSound.play()
+                        break
+                    case 2:
+                        shotKillSound.play()
+                        break
+                    }
                 }
             } else if(pomodoroRoot.state === "break"){
                 timeLeft += interval / 1000
@@ -146,7 +160,7 @@ Rectangle {
             if(mouse.button === Qt.RightButton) {
                 if(pomodoroRoot.state === "break") {
                     pomodoroRoot.state = "pomodoro"
-                    timeLeft = 25 * 60
+                    timeLeft = 3 //25 * 60
                 } else {
                     pomodoroRoot.state = "break"
                     timeLeft = 0
@@ -159,5 +173,23 @@ Rectangle {
                 }
             }
         }
+    }
+
+    SoundEffect {
+        id: dontWorrySound
+        loops: 1
+        source: "dontworry.wav"
+    }
+
+    SoundEffect {
+        id: allYouGotSound
+        loops: 1
+        source: "allyougot.wav"
+    }
+
+    SoundEffect {
+        id: shotKillSound
+        loops: 1
+        source: "shotkill.wav"
     }
 }
