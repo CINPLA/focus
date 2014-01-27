@@ -134,7 +134,6 @@ Rectangle {
                 if(timeLeft < 0) {
                     pomodoroRoot.state = "break"
                     var soundNumber = Math.floor((Math.random()*3))
-                    console.log(soundNumber)
                     switch(soundNumber) {
                     case 0:
                         dontWorrySound.play()
