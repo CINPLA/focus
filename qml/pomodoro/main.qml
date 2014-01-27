@@ -160,7 +160,7 @@ Rectangle {
             if(mouse.button === Qt.RightButton) {
                 if(pomodoroRoot.state === "break") {
                     pomodoroRoot.state = "pomodoro"
-                    timeLeft = 3 //25 * 60
+                    timeLeft = 25 * 60
                 } else {
                     pomodoroRoot.state = "break"
                     timeLeft = 0
