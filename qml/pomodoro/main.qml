@@ -172,6 +172,12 @@ Rectangle {
                 }
             }
         }
+
+        onWheel: {
+            if(pomodoroRoot.state === "pomodoro") {
+                timeLeft += wheel.angleDelta.y / 120. * 60.
+            }
+        }
     }
 
     SoundEffect {

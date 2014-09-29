@@ -7,7 +7,8 @@ int main(int argc, char *argv[])
 
     QtQuick2ApplicationViewer viewer;
     viewer.setMainQmlFile(QStringLiteral("qml/pomodoro/main.qml"));
-    viewer.showFullScreen();
+//    viewer.showFullScreen();
+    viewer.show();
 
     return app.exec();
 }
