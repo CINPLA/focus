@@ -5,6 +5,9 @@ Rectangle {
     id: pomodoroRoot
 
     property real timeLeft: 0
+    property int hoursLeft: Math.floor(timeLeft / 60 / 60)
+    property int minutesLeft: Math.floor((timeLeft % 3600) / 60)
+    property int secondsLeft: Math.floor((timeLeft % 60))
 
     width: 1280
     height: 720
@@ -12,8 +15,10 @@ Rectangle {
     state: "break"
 
     function pad(num, size) {
-        var s = num+"";
-        while (s.length < size) s = "0" + s;
+        var s = Math.floor(num)+"";
+        while (s.length < size) {
+            s = "0" + s;
+        }
         return s;
     }
 
@@ -26,26 +31,26 @@ Rectangle {
             }
             PropertyChanges {
                 target: headerText
-                text: "Don't disturb for"
+                text: "Focusing for"
             }
             PropertyChanges {
                 target: footerText
-                text: "more minutes"
+                text: (hoursLeft > 0) ? "more hours" : ((minutesLeft > 0) ? "more minutes" : "more seconds")
             }
         },
         State {
             name: "pause"
             PropertyChanges {
                 target: pomodoroRoot
-                color: "#CDCD12"
+                color: "#ff7f00"
             }
             PropertyChanges {
                 target: headerText
-                text: "Currently disturbed with"
+                text: "Pausing with"
             }
             PropertyChanges {
                 target: footerText
-                text: "minutes left"
+                text: (hoursLeft > 0) ? "hours left" : ((minutesLeft > 0) ? "minutes left" : "seconds left")
             }
             PropertyChanges {
                 target: timer
@@ -64,7 +69,7 @@ Rectangle {
             }
             PropertyChanges {
                 target: footerText
-                text: "minutes"
+                text: (hoursLeft > 0) ? "hours" : ((minutesLeft > 0) ? "minutes" : "seconds")
             }
         }
     ]
@@ -105,7 +110,9 @@ Rectangle {
         font.pixelSize: height
         horizontalAlignment: Text.AlignHCenter
         scale: paintedWidth > width ? (width / paintedWidth) : 1
-        text: Math.floor(timeLeft / 60) + ":" + pad(Math.floor(timeLeft % 60), 2)
+        text: ((hoursLeft > 0) ? pad(hoursLeft,1) + ":" : "")
+              + ((hoursLeft > 0 || minutesLeft > 0) ? pad(minutesLeft, (hoursLeft > 0) ? 2 : 1) + ":" : "")
+              + pad(secondsLeft, (minutesLeft > 0) ? 2 : 1)
     }
     Text {
         id: footerText
@@ -120,7 +127,7 @@ Rectangle {
         font.pixelSize: height
         horizontalAlignment: Text.AlignHCenter
         scale: paintedWidth > width ? (width / paintedWidth) : 1
-        text: "more minutes"
+        text: hoursLeft > 0 ? "more hours" : "more minutes"
     }
 
     Timer {
