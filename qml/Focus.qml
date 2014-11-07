@@ -96,6 +96,8 @@ Rectangle {
         font.pixelSize: height
         horizontalAlignment: Text.AlignHCenter
         scale: paintedWidth > width ? (width / paintedWidth) : 1
+        smooth: true
+        renderType: Text.NativeRendering
     }
 
     Text {
@@ -113,6 +115,8 @@ Rectangle {
         text: ((hoursLeft > 0) ? pad(hoursLeft,1) + ":" : "")
               + ((hoursLeft > 0 || minutesLeft > 0) ? pad(minutesLeft, (hoursLeft > 0) ? 2 : 1) + ":" : "")
               + pad(secondsLeft, (minutesLeft > 0) ? 2 : 1)
+        smooth: true
+        renderType: Text.NativeRendering
     }
     Text {
         id: footerText
@@ -128,6 +132,8 @@ Rectangle {
         horizontalAlignment: Text.AlignHCenter
         scale: paintedWidth > width ? (width / paintedWidth) : 1
         text: hoursLeft > 0 ? "more hours" : "more minutes"
+        smooth: true
+        renderType: Text.NativeRendering
     }
 
     Timer {
@@ -183,6 +189,9 @@ Rectangle {
         onWheel: {
             if(pomodoroRoot.state === "pomodoro") {
                 timeLeft += wheel.angleDelta.y / 120. * 60.
+                if(timeLeft < 0) {
+                    timeLeft = 0
+                }
             }
         }
     }
@@ -190,18 +199,18 @@ Rectangle {
     SoundEffect {
         id: dontWorrySound
         loops: 1
-        source: "dontworry.wav"
+        source: "../sounds/dontworry.wav"
     }
 
     SoundEffect {
         id: allYouGotSound
         loops: 1
-        source: "allyougot.wav"
+        source: "../sounds/allyougot.wav"
     }
 
     SoundEffect {
         id: shotKillSound
         loops: 1
-        source: "shotkill.wav"
+        source: "../sounds/shotkill.wav"
     }
 }

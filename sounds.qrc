@@ -1,0 +1,7 @@
+<RCC>
+    <qresource prefix="/">
+        <file>sounds/allyougot.wav</file>
+        <file>sounds/dontworry.wav</file>
+        <file>sounds/shotkill.wav</file>
+    </qresource>
+</RCC>
