@@ -9,7 +9,7 @@ ApplicationWindow {
     height: 800
     title: qsTr("FocusMe")
 
-    FocusTime {
+    Focus {
         anchors.fill: parent
     }
 }

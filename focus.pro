@@ -1,9 +1,16 @@
 # The .cpp file which was generated for your project. Feel free to hack it.
-QT += quick
+QT += quick dbus
 
-SOURCES += main.cpp
+SOURCES += main.cpp \
+    pong.cpp
 
 RESOURCES += \
     qml.qrc \
     sounds.qrc \
     fonts.qrc
+
+HEADERS += \
+    pong.h
+
+DISTFILES += \
+    server.py

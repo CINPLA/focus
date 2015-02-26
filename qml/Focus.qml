@@ -1,5 +1,6 @@
 import QtQuick 2.0
 import QtMultimedia 5.0
+import Pong 1.0
 
 Rectangle {
     id: pomodoroRoot
@@ -20,6 +21,18 @@ Rectangle {
             s = "0" + s;
         }
         return s;
+    }
+
+    Pong {
+        onPinged: {
+            if(pomodoroRoot.state === "break") {
+                pomodoroRoot.state = "pomodoro"
+                timeLeft = 25 * 60
+            } else {
+                pomodoroRoot.state = "break"
+                timeLeft = 0
+            }
+        }
     }
 
     states: [
