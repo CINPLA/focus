@@ -5,7 +5,6 @@
 #include <QtCore/QTimer>
 #include <QtDBus/QtDBus>
 
-#define SERVICE_NAME            "org.example.QtDBus.PingExample"
 #include "pong.h"
 
 Pong::Pong()
@@ -16,7 +15,7 @@ Pong::Pong()
                 "\teval `dbus-launch --auto-syntax`\n");
     }
 
-    if (!QDBusConnection::sessionBus().registerService(SERVICE_NAME)) {
+    if (!QDBusConnection::sessionBus().registerService("org.cinpla.focus")) {
         fprintf(stderr, "%s\n",
                 qPrintable(QDBusConnection::sessionBus().lastError().message()));
     }
@@ -24,8 +23,22 @@ Pong::Pong()
     QDBusConnection::sessionBus().registerObject("/", this, QDBusConnection::ExportAllSlots);
 }
 
-QString Pong::ping(const QString &arg)
+QString Pong::response() const
 {
-    emit pinged();
-    return QString("ping(\"%1\") got called").arg(arg);
+    return m_response;
+}
+
+QString Pong::ping(const QString &message)
+{
+    emit pinged(message);
+    return response();
+}
+
+void Pong::setResponse(QString arg)
+{
+    if (m_response == arg)
+        return;
+
+    m_response = arg;
+    emit responseChanged(arg);
 }

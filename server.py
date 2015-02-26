@@ -1,18 +1,10 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
-
 from flask import Flask
 app = Flask(__name__)
-import flask
-from flask import render_template
 from flask import request
 from flask import Response
-from flask import abort
 
 import json
-
-#from settings import slack_key
-import re
+import dbus
 
 @app.route('/receive', methods=['POST'])
 def slack_receive():
@@ -23,23 +15,18 @@ def slack_receive():
     print "received"
     msg = request.form['text']
     print msg
-
-    import dbus
+    #get the interface
 
     #get the session bus
     bus = dbus.SessionBus()
-    #get the object
-    name = "org.example.QtDBus.PingExample"
+    name = "org.cinpla.focus"
     the_object = bus.get_object(name, "/")
-    #get the interface
     the_interface = dbus.Interface(the_object, "local.focus.Pong")
-
-    #call the methods and print the results
-    reply = the_interface.ping("ape")
+    reply = the_interface.ping(msg)
     print(reply)
 
 
-    return Response(json.dumps({'text': "banana"}))
+    return Response(json.dumps({'text': reply}))
 
 @app.route('/')
 def root():

@@ -25,12 +25,21 @@ Rectangle {
 
     Pong {
         onPinged: {
-            if(pomodoroRoot.state === "break") {
+            var oldTimeLeft = timeLeft
+            if(message.indexOf("pomodoro") !== -1) {
                 pomodoroRoot.state = "pomodoro"
                 timeLeft = 25 * 60
-            } else {
+                response = "Entering pomodoro state. They had been chilling for " + oldTimeLeft.toFixed(0) + " seconds."
+            } else if(message.indexOf("break") !== -1) {
                 pomodoroRoot.state = "break"
                 timeLeft = 0
+                response = "Entering break state. Time left was " + oldTimeLeft.toFixed(0) + " seconds."
+            } else if(message.indexOf("pause") !== -1 && pomodoroRoot.state === "pomodoro") {
+                pomodoroRoot.state = "pause"
+                response = "Entering paused state. Time left is " + oldTimeLeft.toFixed(0) + " seconds."
+            } else if(message.indexOf("resume") !== -1 && pomodoroRoot.state === "pause") {
+                pomodoroRoot.state = "pomodoro"
+                response = "Leaving paused state. Time left is " + oldTimeLeft.toFixed(0) + " seconds."
             }
         }
     }
