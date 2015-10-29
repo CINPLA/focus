@@ -7,8 +7,11 @@ branches:
 compiler:
   - gcc
   - clang
-# Change this to your needs
-before_install: sudo apt-get update && sudo apt-get install qtdeclarative5-dev
+sudo: false
+addons:
+  apt:
+    packages:
+      - qtdeclarative5-dev
 script:
   - qmake
   - make
