@@ -13,4 +13,5 @@ HEADERS += \
     pong.h
 
 DISTFILES += \
-    server.py
+    server.py \
+    .travis.yml

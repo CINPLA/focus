@@ -1,7 +1,14 @@
 language: cpp
+os:
+  - linux
+branches:
+  only:
+    - master
 compiler:
   - gcc
   - clang
 # Change this to your needs
 before_install: sudo apt-get update && sudo apt-get install qtdeclarative5-dev
-script: qmake && make
+script:
+  - qmake
+  - make
