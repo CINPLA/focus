@@ -7,12 +7,15 @@ branches:
 compiler:
   - gcc
   - clang
-sudo: false
+sudo: required
+dist: trusty
 addons:
   apt:
+    sources:
+      - ubuntu-sdk-team
     packages:
       - qtdeclarative5-dev
 script:
-  - qmake
+  - /usr/lib/x86_64-linux-gnu/qt5/bin/qmake
   - make
 

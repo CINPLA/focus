@@ -14,4 +14,5 @@ HEADERS += \
 
 DISTFILES += \
     server.py \
-    .travis.yml
+    .travis.yml \
+    README.md
